@@ -26,6 +26,7 @@ library
   exposed-modules:
       MinBPE.Codec
       MinBPE.Codec.Alternate
+      MinBPE.Internal
       MinBPE.TikToken
       MinBPE.Train
       MinBPE.Types

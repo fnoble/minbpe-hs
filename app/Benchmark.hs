@@ -3,6 +3,9 @@ module Main (main) where
 import Criterion.Main
 import Data.ByteString qualified as B
 import MinBPE.Codec
+import MinBPE.Codec.Alternate qualified as Alt
+import MinBPE.Internal
+import MinBPE.Train
 
 main :: IO ()
 main = do
@@ -13,8 +16,7 @@ main = do
   let tokens = toRawTokens inputBSSwift
   let ms = train tokens 20
   let vocab = makeVocab ms
-  let vocabVec = makeVocabVector ms
-  let vocabVecShort = shortVocabVec vocabVec
+  let vocabVec = vocabToVector vocab
   let encodedSwift = encodeBS ms inputBSSwift
   let encodedShakespeare = encodeBS ms inputBSShakespeare
   defaultMain
@@ -29,10 +31,9 @@ main = do
         ],
       bgroup
         "decode"
-        [ bench "taylorswift" $ nf (decodeBS vocab) encodedSwift,
-          bench "shakespeare" $ nf (decodeBS vocab) encodedShakespeare,
-          bench "shakespeare2" $ nf (decodeBS2 vocab) encodedShakespeare,
-          bench "shakespeare3" $ nf (decodeBS3 vocabVec) encodedShakespeare,
-          bench "shakespeare4" $ nf (decodeBS4 vocabVecShort) encodedShakespeare
+        [ bench "taylorswift" $ nf (decode vocab) encodedSwift,
+          bench "shakespeare" $ nf (decode vocab) encodedShakespeare,
+          bench "shakespeare_vec" $ nf (decodeVec vocabVec) encodedShakespeare,
+          bench "shakespeare_alt2" $ nf (Alt.decode2 vocab) encodedShakespeare
         ]
     ]
