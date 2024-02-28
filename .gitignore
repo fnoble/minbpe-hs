@@ -1,0 +1,9 @@
+.stack-work/
+.ipynb_checkpoints/
+*~
+*.o
+*.dyn_*
+*.hi
+stack.yaml.lock
+*.prof
+bench.html

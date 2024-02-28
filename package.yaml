@@ -1,0 +1,62 @@
+name:                minbpe-hs
+version:             0.1.0.0
+github:              "fnoble/minbpe-hs"
+license:             BSD-3-Clause
+author:              "Fergus Noble"
+maintainer:          "fergusnoble@gmail.com"
+copyright:           "2024 Fergus Noble"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+description:         Please see the README on GitHub at <https://github.com/fnoble/minbpe-hs#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- bytestring
+- text
+- containers
+- vector
+- base64 >= 0.4 && < 1.0
+- attoparsec
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+executables:
+  minbpe-hs-benchmark:
+    main:                Benchmark.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - minbpe-hs
+    - criterion
+
+tests:
+  minbpe-hs-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - minbpe-hs
