@@ -24,7 +24,6 @@ import Data.ByteString.Builder
 import Data.ByteString.Lazy qualified as L
 import Data.ByteString.Short qualified as B
   ( ShortByteString,
-    fromShort,
     toShort,
   )
 import Data.List (maximumBy)
@@ -45,7 +44,7 @@ toRawTokens = map fromIntegral . B.unpack
 
 pairs' :: Pairs -> [Token] -> Pairs
 pairs' ps [] = ps
-pairs' ps [t] = ps
+pairs' ps [_] = ps
 pairs' ps (t1 : t2 : ts) = pairs' (Map.insertWith (+) (t1, t2) 1 ps) (t2 : ts)
 
 -- | Extract a 'Map' from all the unique 'Token' pairs in the input to their number of occurances
@@ -54,7 +53,7 @@ pairs = pairs' Map.empty
 
 -- | Find the 'Pair' with the greatest number of occurances in a 'Token' sequence
 topPair :: [Token] -> Pair
-topPair ts = fst $ maximumBy (comparing (\((t1, t2), v) -> v)) $ Map.toList $ pairs ts
+topPair ts = fst $ maximumBy (comparing (\((_, _), v) -> v)) $ Map.toList $ pairs ts
 
 -- | Replace all occurances of 'Pair' with 'Token' in the 'Token' sequence
 merge ::
@@ -68,7 +67,7 @@ merge ::
 merge p@(p1, p2) tp (t1 : t2 : ts)
   | (p1 == t1) && (p2 == t2) = tp : merge p tp ts
   | otherwise = t1 : merge p tp (t2 : ts)
-merge p tp ts = ts
+merge _ _ ts = ts
 
 train' :: [Token] -> [Merge] -> Token -> Int -> ([Merge], [Token])
 train' ts ms _ 0 = (ms, ts)

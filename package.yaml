@@ -1,7 +1,7 @@
 name:                minbpe-hs
 version:             0.1.0.0
 github:              "fnoble/minbpe-hs"
-license:             BSD-3-Clause
+license:             MIT
 author:              "Fergus Noble"
 maintainer:          "fergusnoble@gmail.com"
 copyright:           "2024 Fergus Noble"
@@ -23,6 +23,9 @@ dependencies:
 - vector
 - base64 >= 0.4 && < 1.0
 - attoparsec
+
+default-extensions:
+ - ImportQualifiedPost
 
 ghc-options:
 - -Wall

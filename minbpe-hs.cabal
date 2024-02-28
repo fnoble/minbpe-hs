@@ -1,4 +1,4 @@
-cabal-version: 2.2
+cabal-version: 1.12
 
 -- This file has been generated from package.yaml by hpack version 0.36.0.
 --
@@ -12,7 +12,7 @@ bug-reports:    https://github.com/fnoble/minbpe-hs/issues
 author:         Fergus Noble
 maintainer:     fergusnoble@gmail.com
 copyright:      2024 Fergus Noble
-license:        BSD-3-Clause
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -31,10 +31,10 @@ library
       MinBPE.Types
   other-modules:
       Paths_minbpe_hs
-  autogen-modules:
-      Paths_minbpe_hs
   hs-source-dirs:
       src
+  default-extensions:
+      ImportQualifiedPost
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       attoparsec
@@ -50,10 +50,10 @@ executable minbpe-hs-benchmark
   main-is: Benchmark.hs
   other-modules:
       Paths_minbpe_hs
-  autogen-modules:
-      Paths_minbpe_hs
   hs-source-dirs:
       app
+  default-extensions:
+      ImportQualifiedPost
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       attoparsec
@@ -72,10 +72,10 @@ test-suite minbpe-hs-test
   main-is: Spec.hs
   other-modules:
       Paths_minbpe_hs
-  autogen-modules:
-      Paths_minbpe_hs
   hs-source-dirs:
       test
+  default-extensions:
+      ImportQualifiedPost
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       attoparsec
